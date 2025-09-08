@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/qr-whatsapp-form/static/css/main.5cd3f174.css",
+    "main.js": "/qr-whatsapp-form/static/js/main.98e1aba5.js",
+    "index.html": "/qr-whatsapp-form/index.html",
+    "main.5cd3f174.css.map": "/qr-whatsapp-form/static/css/main.5cd3f174.css.map",
+    "main.98e1aba5.js.map": "/qr-whatsapp-form/static/js/main.98e1aba5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5cd3f174.css",
+    "static/js/main.98e1aba5.js"
+  ]
+}
