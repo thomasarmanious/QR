@@ -1,23 +1,18 @@
 import React from "react";
-import QRCode from "./QRCode";
+import QRCodeWrapper from "./QRCode";
 
-const QRView = () => {
-  const formUrl = "https://qrsurveyapp.netlify.app"; // ✅ your deployed site
+function QRView() {
+  // Replace with your Netlify deployed link
+  const siteUrl = "https://qrsurveyapp.netlify.app/";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-6">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          Survey QR Code
-        </h1>
-        <p className="text-gray-600 mb-6">Scan this to open the survey</p>
-
-        <QRCode value={formUrl} size={200} />
-
-        <p className="mt-4 text-xs text-gray-500 break-all">{formUrl}</p>
-      </div>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h2 className="text-xl font-bold mb-4">
+        Scan this QR to open the Survey
+      </h2>
+      <QRCodeWrapper value={siteUrl} size={200} />
     </div>
   );
-};
+}
 
 export default QRView;
