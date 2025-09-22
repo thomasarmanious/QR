@@ -1,0 +1,73 @@
+/* Background container */
+.survey-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Logo */
+.survey-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.survey-form {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.survey-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Inputs */
+.survey-form input,
+.survey-form textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s;
+}
+
+.survey-form input:focus,
+.survey-form textarea:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+/* Button */
+.survey-form button {
+  padding: 14px;
+  background: #25d366;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.survey-form button:hover {
+  background: #128c7e;
+}
