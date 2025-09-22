@@ -7,142 +7,140 @@ function Survey() {
     phone: "",
     message: "",
   });
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Read WhatsApp number from environment variable
   const whatsappNumber = process.env.REACT_APP_WHATSAPP_NUMBER || "1234567890";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Format message for WhatsApp
-    const message = `
-🆕 New Survey Submission:
+    const message = `New Survey:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Message: ${formData.message}`;
 
-👤 Name: ${formData.name}
-📧 Email: ${formData.email}
-📱 Phone: ${formData.phone}
-💬 Message: ${formData.message}
-
-Sent via QR Survey Form
-    `.trim();
-
-    // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-    // Open WhatsApp
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`;
     window.open(whatsappUrl, "_blank");
 
-    // Reset form after a delay
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-      setIsSubmitting(false);
-      alert("✅ Form submitted! WhatsApp opened with your message.");
-    }, 1000);
+    // Reset form
+    setFormData({ name: "", email: "", phone: "", message: "" });
+  };
+
+  const containerStyle = {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #667eea, #764ba2)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+  };
+
+  const formStyle = {
+    background: "white",
+    padding: "40px",
+    borderRadius: "15px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+    width: "100%",
+    maxWidth: "400px",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "15px",
+    margin: "10px 0",
+    border: "2px solid #e0e0e0",
+    borderRadius: "8px",
+    fontSize: "16px",
+    transition: "border-color 0.3s",
+    outline: "none",
+    boxSizing: "border-box",
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "15px",
+    background: "#25D366",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    marginTop: "20px",
+    transition: "background 0.3s",
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">📋 Survey Form</h1>
-          <p className="text-gray-600">Please fill out all required fields</p>
-        </div>
+    <div style={containerStyle}>
+      <form style={formStyle} onSubmit={handleSubmit}>
+        <h1
+          style={{ textAlign: "center", marginBottom: "30px", color: "#333" }}
+        >
+          Survey Form
+        </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name *
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your full name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              disabled={isSubmitting}
-            />
-          </div>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name *"
+          required
+          value={formData.name}
+          onChange={handleChange}
+          style={inputStyle}
+          onFocus={(e) => (e.target.style.borderColor = "#667eea")}
+          onBlur={(e) => (e.target.style.borderColor = "#e0e0e0")}
+        />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address *
-            </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              disabled={isSubmitting}
-            />
-          </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address *"
+          required
+          value={formData.email}
+          onChange={handleChange}
+          style={inputStyle}
+          onFocus={(e) => (e.target.style.borderColor = "#667eea")}
+          onBlur={(e) => (e.target.style.borderColor = "#e0e0e0")}
+        />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              disabled={isSubmitting}
-            />
-          </div>
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          value={formData.phone}
+          onChange={handleChange}
+          style={inputStyle}
+          onFocus={(e) => (e.target.style.borderColor = "#667eea")}
+          onBlur={(e) => (e.target.style.borderColor = "#e0e0e0")}
+        />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Message *
-            </label>
-            <textarea
-              name="message"
-              placeholder="Enter your message or feedback"
-              required
-              rows="4"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-              disabled={isSubmitting}
-            />
-          </div>
+        <textarea
+          name="message"
+          placeholder="Your Message *"
+          required
+          rows="4"
+          value={formData.message}
+          onChange={handleChange}
+          style={{ ...inputStyle, resize: "vertical", fontFamily: "inherit" }}
+          onFocus={(e) => (e.target.style.borderColor = "#667eea")}
+          onBlur={(e) => (e.target.style.borderColor = "#e0e0e0")}
+        />
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={`w-full p-3 rounded-lg font-semibold text-white transition-all duration-200 ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-700 active:transform active:scale-95"
-            }`}
-          >
-            {isSubmitting ? "Sending..." : "📱 Send to WhatsApp"}
-          </button>
-        </form>
-
-        <div className="mt-4 text-center">
-          <p className="text-xs text-gray-500">
-            Your data will be sent directly via WhatsApp
-          </p>
-        </div>
-      </div>
+        <button
+          type="submit"
+          style={buttonStyle}
+          onMouseEnter={(e) => (e.target.style.background = "#128C7E")}
+          onMouseLeave={(e) => (e.target.style.background = "#25D366")}
+        >
+          Send to WhatsApp
+        </button>
+      </form>
     </div>
   );
 }
